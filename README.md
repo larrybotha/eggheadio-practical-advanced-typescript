@@ -74,12 +74,14 @@ To address the unsafety we have a few options:
 - allow `undefined` as a type on the property; requires guards all over our code
 - initialise the property where it is defined
 - initialise the property inside the constructor
-- use TypeScript's definiteness operator (`!`) to indicate that a value will be
+- use TypeScript's definite assignment operator (`!`) to indicate that a value will be
     provided to the class when instantiated
 
       ```typescript
       class MyClass {
-        // we will definitely have an array to operate on, here
+        // we will definitely have an array to operate on, here, although now we
+        // can still experience runtime errors, but we don't require guards in
+        // order for for tsc to compile
         definiteProperty!: string[]
       }
       ```

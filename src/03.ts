@@ -11,7 +11,7 @@ class Library {
    * call-site's responsibility to guard against falsy values
    * - initialise the value here
    * - initialise the value inside the constructor
-   * - use TypeScript's ! (definiteness operator) if we know that we will be
+   * - use TypeScript's ! (definite aassignment  operator) if we know that we will be
    * provided a value when instantiated
    */
   // titlesUnsafe: string[];
