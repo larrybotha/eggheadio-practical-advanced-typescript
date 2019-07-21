@@ -77,11 +77,11 @@ To address the unsafety we have a few options:
 - use TypeScript's definite assignment operator (`!`) to indicate that a value will be
     provided to the class when instantiated
 
-      ```typescript
-      class MyClass {
-        // we will definitely have an array to operate on, here, although now we
-        // can still experience runtime errors, but we don't require guards in
-        // order for for tsc to compile
-        definiteProperty!: string[]
-      }
-      ```
+  ```typescript
+  class MyClass {
+    // we will definitely have an array to operate on, here, although now we
+    // can still experience runtime errors, but we don't require guards in
+    // order for for tsc to compile
+    definiteProperty!: string[]
+  }
+  ```
