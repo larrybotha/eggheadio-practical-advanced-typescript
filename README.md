@@ -8,6 +8,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 
 - [2. Improve Readability with TypeScript Numeric Separators when working with Large Numbers](#2-improve-readability-with-typescript-numeric-separators-when-working-with-large-numbers)
 - [3. Make TypeScript Class Usage Safer with Strict Property Initialization](#3-make-typescript-class-usage-safer-with-strict-property-initialization)
+- [04. Use the JavaScript “in” operator for automatic type inference in TypeScript](#04-use-the-javascript-in-operator-for-automatic-type-inference-in-typescript)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -85,3 +86,68 @@ To address the unsafety we have a few options:
     definiteProperty!: string[]
   }
   ```
+
+## 04. Use the JavaScript “in” operator for automatic type inference in TypeScript
+
+[04.ts](src/o4.ts)
+
+```
+$ node build/04.js
+```
+
+When dealing with union types, we have a few strategies for control flow
+statements:
+
+1. assume an object is the object we want to deal with:
+
+  ```typescript
+  function myFunc(obj: Interface1 | Interface2) {
+    // assume we've been given an Interface1 object
+    if (<Interface1>obj.interface1Prop) {
+      // ...
+    } else {
+      // ...
+    }
+  }
+  ```
+
+  The problem with this is that TypeScript will throw an error if
+  `interface1Prop` doesn't exist on `Interface2`.
+
+2. use a guard
+
+  ```typescript
+  function myFunc(obj: Interface1 | Interface2) {
+    /**
+     * We're guaranteed an Interface1 object if the predicate returns true now
+     */
+    if (objectIsInterface1(obj)) {
+      // ...
+    } else {
+      // ...
+    }
+  }
+
+  function objectIsInterface1(obj: Interface1 | Interface1): obj is Interface1 {
+    // use the assumption here, instead
+    return (<Interface1>obj).interface1Prop !== undefined;
+  }
+  ```
+
+  but this can quickly become cumbersome
+
+3. use the `in` operator to infer the type of the object
+
+  ```typescript
+  function myFunc(obj: Interface1 | Interface2) {
+    if ("interface1Prop" in obj) {
+      // ...
+    } else {
+      // ...
+    }
+  }
+  ```
+
+  Inside the first block TypeScript will hint the correct properties for that
+  object, while in the second block only the properties for that object will be
+  hinted.
