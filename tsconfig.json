@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "downlevelIteration": true,
+    "lib": ["es2016", "dom"],
+    "noImplicitAny": true,
+    "outDir": "./build"
+  },
+  "include": ["src/**/*"]
+}
