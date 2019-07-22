@@ -10,6 +10,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 - [03. Make TypeScript Class Usage Safer with Strict Property Initialization](#03-make-typescript-class-usage-safer-with-strict-property-initialization)
 - [04. Use the JavaScript “in” operator for automatic type inference in TypeScript](#04-use-the-javascript-in-operator-for-automatic-type-inference-in-typescript)
 - [05. Automatically infer TypeScript types in switch statements](#05-automatically-infer-typescript-types-in-switch-statements)
+- [06. Create Explicit and Readable Type Declarations with TypeScript mapped Type Modifiers](#06-create-explicit-and-readable-type-declarations-with-typescript-mapped-type-modifiers)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -262,3 +263,47 @@ To create a discriminated union:
     This property is called the _discriminant_.
 
 2. create a union type containing all of those types
+
+## 06. Create Explicit and Readable Type Declarations with TypeScript mapped Type Modifiers
+
+[06.ts](src/06.ts)
+
+```
+$ node build/06.js
+```
+
+Using mapped types we can:
+
+- add properties to types
+- add types to existing properties
+- remove properties from types
+- apply bulk changes to types
+
+```typescript
+interface Person {
+  name: string;
+  age: number;
+  favoriteColor?: string;
+}
+
+/**
+ * Mark every property in Person as readonly
+ */
+interface PersonReadonly {
+  +readonly [K in keyof Person]: Person[k];
+}
+
+/**
+ * Remove the optional flag from all properties
+ */
+interface PersonNoOptionals {
+  [K in keyof Person]-?: Person[k];
+}
+
+/**
+ * Allow string for all properties
+ */
+interface PersonNoOptionals {
+  [K in keyof Person]: Person[k] | string;
+}
+```
