@@ -155,10 +155,12 @@ statements:
 
 ## 05. Automatically infer TypeScript types in switch statements
 
-[05.ts](src/05.ts)
+[05.incorrect.ts](src/05.incorrect.ts)
+
+[05.correct.ts](src/05.correct.ts)
 
 ```
-$ node build/05.js
+$ node build/05.correct.js
 ```
 
 In the following example:
