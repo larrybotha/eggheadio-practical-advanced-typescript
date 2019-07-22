@@ -289,21 +289,26 @@ interface Person {
 /**
  * Mark every property in Person as readonly
  */
-interface PersonReadonly {
+type PersonReadonly = {
   +readonly [K in keyof Person]: Person[k];
 }
 
 /**
  * Remove the optional flag from all properties
  */
-interface PersonNoOptionals {
+type PersonNoOptionals = {
   [K in keyof Person]-?: Person[k];
 }
 
 /**
  * Allow string for all properties
  */
-interface PersonNoOptionals {
+type PersonNoOptionals = {
   [K in keyof Person]: Person[k] | string;
 }
 ```
+
+To use type modifiers:
+
+- use the `type` keyword to create a new type, adding the modifier to the body
+    of the declaration
