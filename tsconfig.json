@@ -4,5 +4,6 @@
     "strictNullChecks": true,
     "outDir": "./build"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/**/*.incorrect.ts"]
 }
