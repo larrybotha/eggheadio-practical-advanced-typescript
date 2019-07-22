@@ -259,6 +259,6 @@ To create a discriminated union:
 1. create 2 or more types that share a property with the same name, type, and is
    `readonly`
 
-  This property is called the _discriminant_.
+    This property is called the _discriminant_.
 
 2. create a union type containing all of those types
