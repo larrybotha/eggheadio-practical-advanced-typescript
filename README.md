@@ -11,6 +11,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 - [04. Use the JavaScript “in” operator for automatic type inference in TypeScript](#04-use-the-javascript-in-operator-for-automatic-type-inference-in-typescript)
 - [05. Automatically infer TypeScript types in switch statements](#05-automatically-infer-typescript-types-in-switch-statements)
 - [06. Create Explicit and Readable Type Declarations with TypeScript mapped Type Modifiers](#06-create-explicit-and-readable-type-declarations-with-typescript-mapped-type-modifiers)
+- [07. Use Types vs. Interfaces](#07-use-types-vs-interfaces)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -312,3 +313,65 @@ To use type modifiers:
 
 - use the `type` keyword to create a new type, adding the modifier to the body
     of the declaration
+
+## 07. Use Types vs. Interfaces
+
+
+[07.ts](src/07.ts)
+
+```
+$ node build/07.js
+```
+
+- types are generally used to describe complex objects
+- interfaces are generally used in a more object-oriented fashion to describe
+    the shape of objects
+- two objects that are assigned a type and interface with the same structure can
+    be assigned to one another because TypeScript uses structural typing
+- the following are equivalent:
+
+  ```typescript
+  interface FnInterface {
+    (str: string): void
+  }
+  type FnType = (str: string) => void
+
+  interface ListInterface {
+    [key: number]: string;
+  }
+  type ListType = string[]
+  ```
+
+  The list interface, however, will not benefit from hinting array functions /
+  typechecking
+- a `type` can merge both `interface`s and `type`s, as can an `interface`
+- TypeScript will merge the properties of interfaces with the same names:
+
+  ```typescript
+  interface Foo {
+    a: string;
+  }
+  interface Foo {
+    b: string;
+  }
+  /**
+   * foo has properties a and b
+   */
+  let foo: Foo;
+  ```
+
+  This is useful for extending libraries without changing the source, while
+  maintaining type-strictness:
+
+  ```typescript
+  interface JQuery {
+    myFunc(): JQuery
+  }
+
+  // this will typecheck
+  $(this).myFunc(...)
+  ```
+
+  One caveat: this is only possible if the library is authored as an interface.
+  Make sure to author your libraries' public APIs as interfaces to allow others
+  to extend them
