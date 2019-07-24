@@ -12,6 +12,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 - [05. Automatically infer TypeScript types in switch statements](#05-automatically-infer-typescript-types-in-switch-statements)
 - [06. Create Explicit and Readable Type Declarations with TypeScript mapped Type Modifiers](#06-create-explicit-and-readable-type-declarations-with-typescript-mapped-type-modifiers)
 - [07. Use Types vs. Interfaces](#07-use-types-vs-interfaces)
+- [08. Build self-referencing type aliases in TypeScript](#08-build-self-referencing-type-aliases-in-typescript)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -316,7 +317,6 @@ To use type modifiers:
 
 ## 07. Use Types vs. Interfaces
 
-
 [07.ts](src/07.ts)
 
 ```
@@ -375,3 +375,32 @@ $ node build/07.js
   One caveat: this is only possible if the library is authored as an interface.
   Make sure to author your libraries' public APIs as interfaces to allow others
   to extend them
+
+## 08. Build self-referencing type aliases in TypeScript
+
+[08.ts](src/08.ts)
+
+```
+$ node build/08.js
+```
+
+- interfaces can be self-referencing:
+
+  ```typescript
+  interface TreeNode<T> {
+    value: T;
+    left?: TreeNode<T>;
+    right?: TreeNode<T>;
+  }
+  ```
+
+  This allows one to continue traversing an item with valid type checking:
+
+  ```typescript
+  let node: TreeNode<string> = {value: 'foo'}
+
+  /**
+   * unsafe, but valid TypeScript
+   */
+  node.left.left.left.value;
+  ```
