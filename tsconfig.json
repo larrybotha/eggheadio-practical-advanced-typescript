@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "strictPropertyInitialization": true,
-    "strictNullChecks": true,
+    "target": "es6",
     "outDir": "./build"
   },
   "include": ["src/**/*"],
