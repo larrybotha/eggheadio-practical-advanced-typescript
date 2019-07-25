@@ -13,6 +13,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 - [06. Create Explicit and Readable Type Declarations with TypeScript mapped Type Modifiers](#06-create-explicit-and-readable-type-declarations-with-typescript-mapped-type-modifiers)
 - [07. Use Types vs. Interfaces](#07-use-types-vs-interfaces)
 - [08. Build self-referencing type aliases in TypeScript](#08-build-self-referencing-type-aliases-in-typescript)
+- [09. Simplify iteration of custom data structures in TypeScript with iterators](#09-simplify-iteration-of-custom-data-structures-in-typescript-with-iterators)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -404,3 +405,16 @@ $ node build/08.js
    */
   node.left.left.left.value;
   ```
+
+## 09. Simplify iteration of custom data structures in TypeScript with iterators
+
+[09.ts](src/09.ts)
+
+```
+$ node build/09.js
+```
+
+One can create their own iterable object by implementing `IterableIterator`.
+
+Iterators are not specific to TypeScript; they are a concept built into
+Javascript, and used in arrays, Symbols, Maps, Generators, etc.
