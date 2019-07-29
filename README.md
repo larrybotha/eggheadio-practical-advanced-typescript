@@ -14,6 +14,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 - [07. Use Types vs. Interfaces](#07-use-types-vs-interfaces)
 - [08. Build self-referencing type aliases in TypeScript](#08-build-self-referencing-type-aliases-in-typescript)
 - [09. Simplify iteration of custom data structures in TypeScript with iterators](#09-simplify-iteration-of-custom-data-structures-in-typescript-with-iterators)
+- [10. Use the TypeScript "unknown" type to avoid runtime errors](#10-use-the-typescript-unknown-type-to-avoid-runtime-errors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -418,3 +419,14 @@ One can create their own iterable object by implementing `IterableIterator`.
 
 Iterators are not specific to TypeScript; they are a concept built into
 Javascript, and used in arrays, Symbols, Maps, Generators, etc.
+
+## 10. Use the TypeScript "unknown" type to avoid runtime errors
+
+
+[10.ts](src/10.ts)
+
+```
+$ node build/10.js
+```
+
+- `any` is the most relaxed type in TypeScript
