@@ -64,4 +64,22 @@ const resultUnknown = serviceUnknown.getData();
  */
 if (typeof resultUnknown === 'string') {
   console.log(resultUnknown.toUpperCase());
+} else if (isComment(resultUnknown)) {
+  resultUnknown.data;
+} else {
+  const numbers = <number[]>resultUnknown;
+  numbers.indexOf(1);
+}
+
+/**
+ * isComment
+ *
+ * A type guard returning a boolean for the result of evaluating the type passed
+ * in
+ *
+ * @param {any} type
+ * @returns {type is Comment}
+ */
+function isComment(type: any): type is Comment {
+  return (<Comment>type).message !== undefined;
 }
