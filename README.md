@@ -430,3 +430,44 @@ $ node build/10.js
 ```
 
 - `any` is the most relaxed type in TypeScript
+- one can assign any type to a value with type `any`
+- one can access any property on a type declared as `any`
+
+  e.g.
+
+  ```typescript
+  const obj: any = '';
+
+  // valid
+  obj.a.b.c.d
+  // or
+  obj()
+  ```
+
+The above demonstrates the problem with `any`; any user can access any property
+or even execute a value declared with `any`, which will present itself as a
+runtime error, but not a TypeScript error.
+
+An area where this can be problematic is when retrieving data from an API; is
+the result of one type, or another? By setting the type to `any` for the result,
+we have no confidence in what properties may be requested on the result.
+
+To address this, one can use the `unknown` type. `unknown` prevents accessing
+properties on an object without first type-checking the value:
+
+```typescript
+const objAny: any = 'foo';
+
+// valid TypeScript
+objAny.a.b.c.d
+
+const objUnknown: unknown = 'bar';
+
+// invalid TypeScript
+objUnknown.a
+
+// valid TypeScript
+if (objUnknown.hasOwnProperty('a')) {
+  console.log(objUnknown.a)
+}
+```
