@@ -480,3 +480,33 @@ if (objUnknown.hasOwnProperty('a')) {
 $ node build/11.js
 ```
 
+One can conditionally assign types to properties using ternary operators:
+
+```typescript
+interface GenericWithAny<T> {
+  value: T;
+  someProp: any;
+}
+
+/**
+ * no type hinting / checking on itemAny.someProp
+ */
+const itemAny: GenericWithAny<string> = {
+  value: 'foo',
+  someProp: null;
+}
+
+interface GenericWithConditional<T> {
+  value: T;
+  someProp: T extends string ? Array : number;
+}
+
+/**
+ * We know that someProp must be an array, and we get all the associated hinting
+ * and tpyechecking now
+ */
+const item1: GenericWithConditional<string> = {
+  value: 'bar',
+  someProp: null,
+}
+```
