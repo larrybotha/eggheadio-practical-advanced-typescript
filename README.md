@@ -15,6 +15,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 - [08. Build self-referencing type aliases in TypeScript](#08-build-self-referencing-type-aliases-in-typescript)
 - [09. Simplify iteration of custom data structures in TypeScript with iterators](#09-simplify-iteration-of-custom-data-structures-in-typescript-with-iterators)
 - [10. Use the TypeScript "unknown" type to avoid runtime errors](#10-use-the-typescript-unknown-type-to-avoid-runtime-errors)
+- [11. Dynamically Allocate Function Types with Conditional Types in TypeScript](#11-dynamically-allocate-function-types-with-conditional-types-in-typescript)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -422,7 +423,6 @@ Javascript, and used in arrays, Symbols, Maps, Generators, etc.
 
 ## 10. Use the TypeScript "unknown" type to avoid runtime errors
 
-
 [10.ts](src/10.ts)
 
 ```
@@ -471,3 +471,12 @@ if (objUnknown.hasOwnProperty('a')) {
   console.log(objUnknown.a)
 }
 ```
+
+## 11. Dynamically Allocate Function Types with Conditional Types in TypeScript
+
+[11.ts](src/11.ts)
+
+```
+$ node build/11.js
+```
+
