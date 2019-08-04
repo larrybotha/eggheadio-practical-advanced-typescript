@@ -16,6 +16,9 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
 - [09. Simplify iteration of custom data structures in TypeScript with iterators](#09-simplify-iteration-of-custom-data-structures-in-typescript-with-iterators)
 - [10. Use the TypeScript "unknown" type to avoid runtime errors](#10-use-the-typescript-unknown-type-to-avoid-runtime-errors)
 - [11. Dynamically Allocate Function Types with Conditional Types in TypeScript](#11-dynamically-allocate-function-types-with-conditional-types-in-typescript)
+  - [Conditionally assigning types](#conditionally-assigning-types)
+  - [Conditional types and unions of types](#conditional-types-and-unions-of-types)
+  - [Avoid union types requiring overloaded functions for dynamic type arguments](#avoid-union-types-requiring-overloaded-functions-for-dynamic-type-arguments)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -474,10 +477,12 @@ if (objUnknown.hasOwnProperty('a')) {
 
 ## 11. Dynamically Allocate Function Types with Conditional Types in TypeScript
 
-[11.ts](src/11.ts)
+### Conditionally assigning types
+
+[11.1.ts](src/11.1.ts)
 
 ```
-$ node build/11.js
+$ node build/11.1.js
 ```
 
 One can conditionally assign types to properties using ternary operators:
@@ -508,5 +513,64 @@ interface GenericWithConditional<T> {
 const item1: GenericWithConditional<string> = {
   value: 'bar',
   someProp: null,
+}
+```
+
+### Conditional types and unions of types
+
+[11.2.ts](src/11.2.ts)
+
+```
+$ node build/11.2.js
+```
+
+With the following two properties in TypeScript:
+
+1. conditional types distribute over unions of types
+2. TypeScript "ignores" `never` types in unions
+
+we have the following:
+
+```typescript
+/**
+ * If an array is passed in, return the array of that type, otherwise indicate
+ * that the type can never be assigned
+ */
+ type TypeArray<T> = T extends any[] ? T : never;
+
+/**
+ * Create a type that allows only strings or numbers as types within the array
+ *
+ * Despite adding `string` and `number` to the union, the resulting union is
+ *    string[] | number[]
+ *
+ * because when [1] is applied we get:
+ *    never | never | string[] | number[]
+ *
+ * and then when [2] is applied we get:
+ *    string[] | number[]
+ */
+ type StringsOrNumbers = TypeArray<string | number | string[] | number[]>;
+```
+
+### Avoid union types requiring overloaded functions for dynamic type arguments
+
+[11.3.ts](src/11.3.ts)
+
+```bash
+$ node build/11.3.js
+```
+
+Instead of returning a simple union from a function, we can use a conditional
+type to specify which type will be returned.
+
+To improve type-safety, one can specify in the argument of the generic type
+the shape of the generic we expect, thus preventing the failure statement of the
+ternary from simply returning the alternative type, regardless of the generic's
+type:
+
+```typescript
+interface ItemServiceConditionalStrict {
+  getItem<T extends string | number>(id: T): T extends string ? Book : Tv;
 }
 ```
