@@ -584,3 +584,15 @@ interface ItemServiceConditionalStrict {
 $ node build/12.js
 ```
 
+```typescript
+const someObj = {
+  id: 1,
+  name: 'Sam',
+};
+
+// keyof T --> number | string
+type Keys<T extends object> = keyof T
+
+// T["id" | "name"] --> T["id"] | T["name"] --> number | string
+tpye KeysArray<T extends object> = T[keyof T]
+```
