@@ -19,6 +19,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
   - [Conditionally assigning types](#conditionally-assigning-types)
   - [Conditional types and unions of types](#conditional-types-and-unions-of-types)
   - [Avoid union types requiring overloaded functions for dynamic type arguments](#avoid-union-types-requiring-overloaded-functions-for-dynamic-type-arguments)
+- [12. Use TypeScript conditional types to create a reusable Flatten type](#12-use-typescript-conditional-types-to-create-a-reusable-flatten-type)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -574,3 +575,12 @@ interface ItemServiceConditionalStrict {
   getItem<T extends string | number>(id: T): T extends string ? Book : Tv;
 }
 ```
+
+## 12. Use TypeScript conditional types to create a reusable Flatten type
+
+[12.ts](src/12.ts)
+
+```bash
+$ node build/12.js
+```
+
