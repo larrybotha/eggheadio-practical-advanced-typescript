@@ -509,7 +509,7 @@ interface GenericWithConditional<T> {
 
 /**
  * We know that someProp must be an array, and we get all the associated hinting
- * and tpyechecking now
+ * and typechecking now
  */
 const item1: GenericWithConditional<string> = {
   value: 'bar',
@@ -593,6 +593,6 @@ const someObj = {
 // keyof T --> number | string
 type Keys<T extends object> = keyof T
 
-// T["id" | "name"] --> T["id"] | T["name"] --> number | string
-tpye KeysArray<T extends object> = T[keyof T]
+// T["id" | "name"] --> T["id"] | T["name"]
+type KeysArray<T extends object> = T[keyof T]
 ```
