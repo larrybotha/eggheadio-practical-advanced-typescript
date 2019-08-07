@@ -20,6 +20,7 @@ Exercises and annotations for Egghead.io's [Practical Advanced TypeScript](https
   - [Conditional types and unions of types](#conditional-types-and-unions-of-types)
   - [Avoid union types requiring overloaded functions for dynamic type arguments](#avoid-union-types-requiring-overloaded-functions-for-dynamic-type-arguments)
 - [12. Use TypeScript conditional types to create a reusable Flatten type](#12-use-typescript-conditional-types-to-create-a-reusable-flatten-type)
+- [13. Infer the Return Type of a Generic Function Type Parameter](#13-infer-the-return-type-of-a-generic-function-type-parameter)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -596,3 +597,12 @@ type Keys<T extends object> = keyof T
 // T["id" | "name"] --> T["id"] | T["name"]
 type KeysArray<T extends object> = T[keyof T]
 ```
+
+## 13. Infer the Return Type of a Generic Function Type Parameter
+
+[13.ts](src/13.ts)
+
+```bash
+$ node build/13.js
+```
+
