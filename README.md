@@ -606,3 +606,22 @@ type KeysArray<T extends object> = T[keyof T]
 $ node build/13.js
 ```
 
+The `infer` keyword can be used (only in conjunction with the `extends` keyword)
+to infer the type of a function or value:
+
+```typescript
+type UnpackPromise<T> = T extends Promise<infer K>[] ? K : any;
+const xs = [Promise.resolve(true)];
+type ExpectBoolean = UnpackPromise<typeof xs>; // boolean
+```
+
+TypeScript's `ReturnType` allows one to get the return type of a function
+dynamically:
+
+```typescript
+function getValue(seed: number) {
+  return number + 5;
+}
+
+type Value = ReturnType<typeof getValue>; // number
+```
